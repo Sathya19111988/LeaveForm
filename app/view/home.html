@@ -1,0 +1,6 @@
+<div>
+<input type="text" data-ng-model='name'/>{{name}}
+<ul>
+	<li data-ng-repeat="cust in customers| filter:name">{{cust}}</li>
+</ul>
+</div>
