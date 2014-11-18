@@ -1,0 +1,698 @@
+1. 
+
+1.package pkgA;
+2.public class Foo {
+3.	int a = 5;
+4.	protected int b = 6;
+5.	public int c = 7;
+6.}
+
+7.package pkgB;
+8.import pkgA.*;
+9.public class Baz {
+10.	public static void main(String[] args) {
+11.		Foo f = new Foo();
+12.		System.out.print(" " + f.a);
+13.		System.out.print(" " + f.b);
+14.		System.out.print(" " + f.c);
+15.	}
+16.}
+
+ What is the result? (Choose all that apply.)
+ A. 5 6 7
+ B. 5 followed by an exception
+ C. Compilation fails with an error on line 12
+ D. Compilation fails with an error on line 13
+ 
+ Ans: C, D
+ 
+ -----------------------------------------------------------------------------------------
+ 2.
+ 
+ public abstract interface Frobnicate { public void twiddle(String s); }
+ 
+ Which is a correct class? (Choose all that apply.)
+ 
+ A. public abstract class Frob implements Frobnicate { 
+		public abstract void twiddle(String s) { }
+	}
+ B. public abstract class Frob implements Frobnicate { }
+ C. public class Frob extends Frobnicate {
+		public void twiddle(Integer i) { }
+	}
+ D. public class Frob implements Frobnicate {
+		public void twiddle(Integer i) { }
+	}
+ E. public class Frob implements Frobnicate {
+		public void twiddle(String i) { }
+		public void twiddle(Integer s) { }
+	}
+
+Ans: B, E
+
+-----------------------------------------------------------------------------------------
+3. 
+
+ public class Tenor extends Singer { 
+	public static String sing() { return "fa"; }
+	public static void main(String[] args) {
+		Tenor t = new Tenor();
+		Singer s = new Tenor();
+		System.out.println(t.sing() + " " + s.sing());
+	}
+ }
+ class Singer { public static String sing() { return "la"; } }
+ 
+ What is the result?
+ 
+ A. fa fa
+ B. fa la
+ C. la la
+ D. Compilation fails
+ 
+ Ans: B
+ 
+ -----------------------------------------------------------------------------------------
+ 4. 
+ 
+ class Mixer {
+	Mixer() { }
+	Mixer(Mixer m) { 
+		m1 = m; 
+	}
+	Mixer m1;
+	public static void main(String[] args) {
+		Mixer m2 = new Mixer();
+		Mixer m3 = new Mixer(m2); m3.go();
+		Mixer m4 = m3.m1; m4.go();
+		Mixer m5 = m2.m1; m5.go();
+	}
+	void go() { System.out.print("hi "); }
+}
+
+What is the result?
+
+ A. hi hi
+ B. hi hi hi
+ C. Compilation fails
+ D. hi hi, followed by an exception
+ 
+ Ans: D
+ 
+ 
+ -----------------------------------------------------------------------------------------
+ 5.
+ 
+ class Fizz {
+	int x = 5;
+	public static void main(String[] args) {
+		final Fizz f1 = new Fizz();
+		Fizz f2 = new Fizz();
+		Fizz f3 = FizzSwitch(f1,f2);
+		System.out.println((f1 == f3) + " " + (f1.x == f3.x));
+	}
+	static Fizz FizzSwitch(Fizz x, Fizz y) {
+		final Fizz z = x;
+		z.x = 6;
+		return z;
+	} 
+}
+
+What is the result?
+ A. true true
+ B. false true
+ C. true false
+ D. false false
+ 
+ Ans: A
+ 
+ -----------------------------------------------------------------------------------------
+ 6.
+ 
+ public class Ouch {
+	public static void main(String[] args) {
+	    int ouch = 8;
+		new Ouch().go(ouch);
+		System.out.print(" " + ouch);
+	}
+	void go(int ouch) {
+		ouch++;
+		for(int ouch = 3; ouch < 6; ouch++) {};
+		System.out.print(" " + ouch);
+	}
+ } 
+ 
+ What is the result?
+ A. 5 7
+ B. 5 8
+ C. 8 8
+ D. Compilation fails 
+ 
+ Ans: D
+ 
+ -----------------------------------------------------------------------------------------
+ 7.
+ 
+ public class Dark {
+	int x = 3;
+	public static void main(String[] args) {
+		new Dark().go1();
+	}
+	void go1() {
+		int x;
+		go2(++x);
+	}
+	void go2(int y) {
+		int x = ++y;
+		System.out.println(x);
+	}
+ }
+
+ What is the result?
+ A. 2
+ B. 3
+ C. Compilation fails
+ D. 5
+ 
+Ans: C
+
+-----------------------------------------------------------------------------------------
+8.
+
+class Hexy {
+ public static void main(String[] args) {
+	Integer i = 42;
+	String s = (i<40)?"life":(i>50)?"universe":"everything";
+	System.out.println(s);
+ }
+}
+ What is the result?
+ A. null
+ B. life
+ C. everything
+ D. universe
+ E. Compilation fails  
+ 
+ Ans: C
+
+ 
+ -----------------------------------------------------------------------------------------
+9. 
+
+ public class Twisty {
+ 
+	int index = 2;
+	public static void main(String[] args) {
+		new Twisty().go();
+	}
+	void go() {
+		int [][] dd = {{9,8,7}, {6,5,4}, {3,2,1,0,9}};
+		System.out.println(dd[index++][++index]);
+	}
+ }
+ 
+ What is the result? (Choose all that apply.)
+ A. 1
+ B. 9
+ C. 4
+ D. 6
+ 
+ 
+ Ans: B
+ 
+ 
+ -----------------------------------------------------------------------------------------
+ 10.
+ 
+public class SpecialOps {
+	public static void main(String[] args) {
+		String s = "";
+		Boolean b1 = true;
+		Boolean b2 = false;
+		if((b2 = false) | (21%5) > 2) s += "x";
+		if(b1 || (b2 = true)) s += "y";
+		if(b2 == true) s += "z";
+		System.out.println(s);
+	}
+}
+ 
+ Which are true? (Choose all that apply.)
+ 
+ A. Compilation fails
+ B. x will be included in the output
+ C. y will be included in the output
+ D. z will be included in the output
+ 
+ Ans: C
+ 
+ 
+ -----------------------------------------------------------------------------------------
+ 11.
+ 
+ public class Spock {
+	public static void main(String[] args) {
+		int mask = 0;
+		int count = 0;
+		if( ((5<7) || (++count < 10)) | mask++ < 10 ) mask = mask + 1; 
+		if( (6 > 8) ^ false) mask = mask + 10;
+		if( !(mask > 1) && ++count > 1) mask = mask + 100;
+		System.out.println(mask + " " + count);
+	}
+ }
+ 
+ Which two answers are true about the value of mask and the value of count at line 10? 
+(Choose two.)
+ A. count is 0
+ B. mask is 1
+ C. mask is 2
+ D. mask is 10
+ E. mask is greater than 10
+
+ Ans: A, C
+
+
+ -----------------------------------------------------------------------------------------
+12.
+ 
+1. class Loopy {
+2. 	  public static void main(String[] args) {
+3. 		int[] x = {7,6,5,4,3,2,1};
+4. 		// insert code here 
+5.		System.out.print(y + " ");
+6. 		}
+7. 	  }
+8. } 
+
+Which, inserted independently at line 4, compiles? (Choose all that apply.)
+ A. for(int y : x) {
+ B. for(int y=0, z=0; z<x.length; z++) { y = x[z]; 
+ C. int y = 0; for(int z=0; z<x.length; z++) { y = x[z];
+ D. All the above
+ 
+ Ans : D
+
+ 
+ -----------------------------------------------------------------------------------------
+ 13.
+ 
+ public class Ebb {
+	static int x = 7;
+	public static void main(String[] args) {
+		String s = "";
+		for(int y = 0; y < 3; y++) {
+			x++;
+			switch(x) {
+				case 8: s += "8 ";
+				case 9: s += "9 ";
+				case 10: { s+= "10 "; break; }
+				default: s += "d ";
+				case 13: s+= "13 ";
+			}
+		}
+		System.out.println(s); 
+	}
+ } 
+ 
+ What is the result?
+ 
+ A. 8 9 10 9 10 10
+ B. 8 9 10 d
+ C. 9 10 10 d
+ D. 9 10 10 d 13
+ 
+ Ans: A
+ 
+ -----------------------------------------------------------------------------------------
+ 14.
+ 
+ public class Circles {
+	public static void main(String[] args) {
+		int[] ia = {1,3,5,7,9};
+		for(int x : ia) {
+			for(int j = 0; j < 3; j++) {
+				if(x > 4 && x < 8) continue;
+					System.out.print(" " + x);
+					if(j == 1) break;
+					continue;
+			}
+			continue;
+		}
+	}
+ }
+ 
+ What is the result?
+ 
+ A. 1 1 1 3 3 3 9 9 9
+ B. 5 5 7 7 
+ C. 1 1 3 3 9 9
+ D. 1 3 3 9 9
+ 
+ Ans: C
+ 
+ 
+ -----------------------------------------------------------------------------------------
+ 15.
+ 
+ public class Theory {
+	public static void main(String[] args) {
+		String s1 = "abc";
+		String s2 = s1;
+		s1 += "d";
+		System.out.println(s1 + " " + s2 + " " + (s1==s2));
+
+		StringBuffer sb1 = new StringBuffer("abc");
+		StringBuffer sb2 = sb1;
+		sb1.append("d");
+		System.out.println(sb1 + " " + sb2 + " " + (sb1==sb2));
+	}
+ }
+ 
+ Which are true? (Choose all that apply.)
+ A. Compilation fails
+ B. The first line of output is abc abc true
+ C. The first line of output is abc abc false
+ D. The first line of output is abcd abc false
+ E. The second line of output is abcd abc false
+ F. The second line of output is abcd abcd true
+ 
+ Ans: D, F
+ 
+ 
+ -----------------------------------------------------------------------------------------
+ 16.
+ 
+ import java.io.*;
+ public class ReadingFor {
+	public static void main(String[] args) {
+		String s;
+		try {
+			FileReader fr = new FileReader("myfile.txt");
+			BufferedReader br = new BufferedReader(fr);
+			while((s = br.readLine()) != null) {
+				System.out.println(s);
+			}
+		} catch (IOException e) { System.out.println("io error"); }
+	}
+}
+
+ And given that myfile.txt contains the following two lines of data:
+ab
+cd
+
+What is the result?
+ A. ab
+ B. abcd
+ C. ab
+	cd
+ D. Compilation fails
+ 
+ Ans: C
+ 
+ 
+ -----------------------------------------------------------------------------------------
+ 17.
+ 
+ public static void main(String[] args) {
+	// INSERT DECLARATION HERE 
+	for (int i = 0; i <= 10; i++) {
+		List<Integer> row = new ArrayList<Integer>();
+		for (int j = 0; j <= 10; j++) {
+			row.add(i * j);
+		}
+		table.add(row);
+	}
+	for (List<Integer> row : table) {
+		System.out.println(row);
+	}
+ }
+ Which statements could be inserted at // INSERT DECLARATION HERE to allow this code to 
+compile and run? (Choose all that apply.)
+ A. List<List<Integer>> table = new List<List<Integer>>();
+ B. List<List<Integer>> table = new ArrayList<List<Integer>>();
+ C. List<List<Integer>> table = new ArrayList<ArrayList<Integer>>();
+ D. None of the above
+ 
+ Ans: B
+ 
+ 
+ -----------------------------------------------------------------------------------------
+ 18.
+ 
+ public static void before() {
+	Set set = new TreeSet();
+	set.add("2");
+	set.add(3);
+	set.add("1");
+	Iterator it = set.iterator();
+	while (it.hasNext())
+		System.out.print(it.next() + " ");
+ }
+ 
+ Which statements are true?
+ A. The before() method will throw an exception at runtime
+ B. The before() method will print 1 2 3
+ C. The before() method will print three numbers, but the order cannot be determined
+ D. The before() method will not compile
+ 
+ Ans: A
+ 
+ 
+ -----------------------------------------------------------------------------------------
+ 19. Which collection class(es) allows you to grow or shrink its size and provides indexed access to 
+     its elements, but whose methods are not synchronized? (Choose all that apply.)
+	 
+ A. java.util.HashSet
+ B. java.util.LinkedHashSet
+ C. java.util.List
+ D. java.util.ArrayList
+ 
+ Ans: D
+ 
+ 
+ -----------------------------------------------------------------------------------------
+ 20.
+ 
+1. class Maybe {
+2.	public static void main(String[] args) {
+3.		boolean b1 = true;
+4.		boolean b2 = false;
+5.		System.out.print(!(!false));
+6.		System.out.print(" " + (!b1 & (b2 = true)));
+7.		System.out.println(" " + (b2 && b1));
+8.	}
+9. }
+Which are true?
+  A. Line 5 produces true.
+  B. Line 5 produces false.
+  C. Line 6 produces false.
+  D. Line 6 produces true.
+  E. Line 7 produces false.
+  F. Line 7 produces true.
+  
+  Ans: B,C,F
+  
+-----------------------------------------------------------------------------------------
+21.
+
+ public void testIfA() {
+	if (testIfB("TRUE")) {
+		System.out.println("True");
+	} else {
+		System.out.println("Not true");
+	}
+ }
+ public Boolean testIfB(String str) {
+	return Boolean.valueOf(str);
+ }
+What is the result when method testIfA method is invoked?
+
+  A. True
+  B. Not true
+  C. An exception is thrown at runtime.
+  D. Compilation fails
+  
+  Ans: A
+  
+  
+-----------------------------------------------------------------------------------------
+22. Which of these is necessary to specify at time of array initialization?
+A. Row
+B. Column
+C. Both Row and Column
+D. None of the mentioned
+
+Ans: A
+
+
+-----------------------------------------------------------------------------------------
+23.
+
+class ArrayOutput {
+	public static void main(String args[]) {
+		int array_variable [] = new int[10];
+	    for (int i = 0; i < 10; ++i) {
+            array_variable[i] = i;
+            System.out.print(array_variable[i] + " ");
+            i++;
+        }
+    } 
+}
+
+What is the result?
+
+A. 1 3 5 7 9
+B. 0 2 4 6 8
+C. 0 1 2 3 4 5 6 7 8 9
+D. 1 2 3 4 5 6 7 8 9 10
+
+Ans: B
+
+
+-----------------------------------------------------------------------------------------
+24.
+
+class multidimention_array {
+	public static void main(String args[]) {
+        int arr[][] = new int[3][];
+        arr[0] = new int[1];
+        arr[1] = new int[2];
+        arr[2] = new int[3];               
+	    int sum = 0;
+	    for (int i = 0; i < 3; ++i) {
+	        for (int j = 0; j < i + 1; ++j) {
+               arr[i][j] = j + 1;
+			}
+		}
+	    for (int i = 0; i < 3; ++i) {
+	        for (int j = 0; j < i + 1; ++j) {
+                sum += arr[i][j];
+			}
+		}
+	    System.out.print(sum); 	
+    } 
+}
+
+What is the result?
+
+A. 11
+B. 10
+C. 13
+D. 14
+
+Ans: B
+
+
+-----------------------------------------------------------------------------------------
+
+25. 
+
+public class TestClass {
+
+  public static void main(String[] args) {
+  
+    List<String> list = new ArrayList<String> ();
+	list.add("banana");
+	list.add("apple");
+	list.add("grapes");
+	
+	System.out.println(list.get(2));
+  }
+}
+
+What is the result?
+
+  A. apple
+  B. banana
+  C. grapes
+  D. Compilation fails
+  
+  Ans: C
+  
+  
+-----------------------------------------------------------------------------------------
+26.
+
+public class TestClass {
+
+  public static void main(String[] args) {
+  
+    Map<String, Integer> map = new HashMap<String, Integer> ();
+	map.put("banana", 5);
+	map.put("apple", 7);
+	map.put("grapes", 10);
+	map.put("apple", map.get("grapes"));
+	
+	System.out.println(map.get("apple"));
+  }
+}
+
+What is the result?
+
+  A. 7
+  B. 17
+  C. duplicates not allowed in map 
+  D. 10
+  
+  Ans: D
+  
+-----------------------------------------------------------------------------------------
+
+27. 
+
+public class TestClass {
+
+  public static void main(String[] args) {
+  
+    SortedSet<String> set = new TreeSet<String> ();
+	set.add("banana");
+	set.add("apple");
+	set.add("grapes");
+	
+	System.out.println(set.get(0));
+  }
+}
+
+What is the result?
+
+  A. apple
+  B. banana
+  C. grapes
+  D. Compilation fails
+  
+  Ans: D
+  
+-----------------------------------------------------------------------------------------  
+28. Which of these access specifiers must be used for main() method?
+
+  A. private
+  B. public
+  C. protected
+  D. None of the mentioned
+  
+  Ans: B
+  
+-----------------------------------------------------------------------------------------
+29. Which of the following statements are incorrect?
+
+A. public members of class can be accessed by any code in the program.
+B. private members of class can only be accessed by other members of the class.
+C. private members of class can be inherited by a sub class, and become protected members in sub class.
+D. protected members of a class can be inherited by a sub class, and become private members of the sub class.
+
+Ans: C
+
+-----------------------------------------------------------------------------------------
+30. 
+
+String river = new String(“Columbia”);
+System.out.println(river.size());
+
+What is printed?
+A. Compilation fails
+B. 7
+C. 8
+D. Columbia
+
+Ans: A
+
+-----------------------------------------------------------------------------------------
